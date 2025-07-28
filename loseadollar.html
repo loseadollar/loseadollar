@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lose a Dollar</title>
+  <style>
+    body {
+      background: white;
+      font-family: "Times New Roman", serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    button {
+      background: white;
+      border: 1px solid black;
+      padding: 10px 20px;
+      font-family: "Times New Roman", serif;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="step1">
+    <p>Spend a dollar to lose a dollar. You get nothing. Seriously.</p>
+    <button onclick="showWarning()"> I don't care, I want to lose a dollar </button>
+  </div>
+
+  <div id="step2" class="hidden">
+    <p>You will lose one dollar. <br>
+    You will get absolutely nothing. <br>
+    It cannot be returned or refunded.</p>
+    <!--Replace the action below with your PayPal form -->
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" onsubmit="paymentInitiated()">
+      <!-- <input type="hidden" name="cmd" value="_xclick">
+      <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL@example.com">
+      <input type="hidden" name="item_name" value="Lose a Dollar">
+      <input type="hidden" name="amount" value="1.00">
+      <input type="hidden" name="currency_code" value="USD"> -->
+      <button type="submit">Proceed to Lose $1</button>
+    </form>
+  </div>
+
+  <div id="step3" class="hidden">
+    <p>Your dollar has been permanently lost and will now wander into eternity. <br>
+    Would you like to lose another dollar so it's not lonely?</p>
+   
+    <button onclick="restart()">Refresh</button>
+  </div>
+
+  <script>
+    function showWarning() {
+      document.getElementById("step1").classList.add("hidden");
+      document.getElementById("step2").classList.remove("hidden");
+    }
+
+    function paymentInitiated() {
+      setTimeout(() => {
+        document.getElementById("step2").classList.add("hidden");
+        document.getElementById("step3").classList.remove("hidden");
+      }, 1000); // simulate PayPal redirect delay
+    }
+
+    function startAnother() {
+      document.getElementById("step3").classList.add("hidden");
+      document.getElementById("step4").classList.remove("hidden");
+    }
+
+    function restart() {
+      location.reload();
+    }
+  </script>
+</body>
+</html>
